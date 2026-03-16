@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="utf-8">
+    <title>M&D Luxury :: Servicio Premium</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta name="description" content="M&D Luxury, Somos tu Empresa de Transporte Premium al Aeropuerto, Traslados y Recojos las 24 Horas">
+    <meta name="keywords" content="taxi satelital, taxi seguro, taxi aeropuerto, taxi factura, taxi lima, taxi 24 horas, m&d luxury" />
+    <meta name="author" content="M&D Luxury">
+    <meta name="theme-color" content="#030712">
+
+    <!-- Preconnects para optimizar la carga de recursos externos -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://images.unsplash.com">
+    <link rel="preconnect" href="https://i.postimg.cc">
+
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#10b981', // Emerald green
+                        dark: '#030712',
+                        darker: '#111827',
+                        darkest: '#1F2937'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        /* Estilos Generales */
+        body { background-color: #030712; color: #e5e7eb; }
+        
+        /* Barra de desplazamiento personalizada */
+        html { scrollbar-width: thin; scrollbar-color: #1F2937 #030712; }
+        ::-webkit-scrollbar { width: 8px; }
+        @media (min-width: 768px) { ::-webkit-scrollbar { width: 10px; } }
+        ::-webkit-scrollbar-track { background: #030712; }
+        ::-webkit-scrollbar-thumb { background-color: #1F2937; border-radius: 10px; border: 2px solid #030712; }
+        ::-webkit-scrollbar-thumb:hover { background-color: #10b981; }
+
+        /* Pre-cargador */
+        #preloader {
+            position: fixed; inset: 0;
+            background-color: #030712; z-index: 9999;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+        }
+        .spinner {
+            border: 4px solid rgba(16, 185, 129, 0.2);
+            width: 40px; height: 40px; border-radius: 50%;
+            border-left-color: #10b981;
+            animation: spin 1s linear infinite;
+        }
+        @media (min-width: 768px) {
+            .spinner { width: 50px; height: 50px; }
+        }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+
+        /* Efectos de Iconos */
+        .icon-fx {
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.3s ease, color 0.3s ease;
+            filter: drop-shadow(0 0 2px rgba(16, 185, 129, 0.2));
+            display: inline-block;
+            will-change: transform;
+        }
+        .icon-fx:hover, .icon-fx:active,
+        a:hover .icon-fx, a:active .icon-fx,
+        button:hover .icon-fx, button:active .icon-fx,
+        .group:hover .icon-fx {
+            transform: scale(1.15) translateY(-2px);
+            filter: drop-shadow(0 0 10px rgba(16, 185, 129, 0.9));
+            color: #fff;
+        }
+        
+        .pulse-fx {
+            animation: pulse-glow 2s infinite;
+        }
+        @keyframes pulse-glow {
+            0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); transform: scale(1); }
+            70% { box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); transform: scale(1.05); }
+            100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); transform: scale(1); }
+        }
+
+        /* Botones Flotantes Optimizados para Móviles */
+        .floating-buttons {
+            position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 50;
+            display: flex; flex-direction: column; gap: 0.75rem;
+        }
+        .float-btn {
+            width: 50px; height: 50px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 24px; color: white;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            will-change: transform;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+        }
+        .float-btn:hover, .float-btn:active { transform: scale(1.1); }
+        .float-btn i { transition: transform 0.3s ease; }
+        .float-btn:hover i, .float-btn:active i { animation: icon-wiggle 0.5s ease-in-out; }
+
+        @media (min-width: 768px) {
+            .floating-buttons { bottom: 2rem; right: 2rem; gap: 1rem; }
+            .float-btn { width: 60px; height: 60px; font-size: 30px; }
+        }
+
+        @keyframes icon-wiggle {
+            0%, 100% { transform: rotate(0deg) scale(1); }
+            25% { transform: rotate(-15deg) scale(1.1); }
+            50% { transform: rotate(15deg) scale(1.1); }
+            75% { transform: rotate(-10deg) scale(1.1); }
+        }
+
+        .bg-whatsapp { background-color: #25d366; }
+        .bg-phone { background-color: #3b82f6; }
+
+        /* Texto Animado */
+        .animated-text span {
+            display: inline-block; opacity: 0; filter: blur(4px);
+            animation: fade-in 0.8s forwards cubic-bezier(0.11, 0, 0.5, 0);
+            will-change: opacity, filter;
+        }
+        @keyframes fade-in { 100% { opacity: 1; filter: blur(0); } }
+
+        /* Tarjetas Flip Optimizadas */
+        .flip-card { perspective: 1000px; }
+        .flip-card-inner {
+            position: relative; width: 100%; height: 100%;
+            text-align: center; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+            will-change: transform;
+        }
+        /* En móviles permitimos activar el flip tocando */
+        .flip-card:hover .flip-card-inner, .flip-card:active .flip-card-inner, .flip-card:focus-within .flip-card-inner { transform: rotateY(180deg); }
+        .flip-card-front, .flip-card-back {
+            position: absolute; inset: 0;
+            -webkit-backface-visibility: hidden; backface-visibility: hidden;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            padding: 1.25rem; border-radius: 0.75rem; background-color: #1F2937;
+        }
+        .flip-card-back {
+            transform: rotateY(180deg);
+            background: linear-gradient(135deg, #1F2937, #111827);
+            border: 1px solid #10b981;
+            box-shadow: inset 0 0 15px rgba(16, 185, 129, 0.15);
+        }
+        @media (min-width: 768px) {
+            .flip-card-front, .flip-card-back { padding: 1.5rem; }
+        }
+
+        /* Galería */
+        .gallery-item { position: relative; overflow: hidden; border-radius: 0.75rem; }
+        .gallery-item .background-image {
+            width: 100%; height: 100%; background-size: cover; background-position: center;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            will-change: transform;
+        }
+        .gallery-item:hover .background-image, .gallery-item:active .background-image { transform: scale(1.1) rotate(-1deg); }
+        .gallery-item .text-overlay {
+            position: absolute; inset: 0; display: flex; align-items: flex-end; justify-content: center;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+            color: white; padding: 1rem; opacity: 1; transition: opacity 0.4s ease;
+        }
+        @media (min-width: 1024px) {
+            .gallery-item .text-overlay { padding: 1.5rem; opacity: 0; }
+            .gallery-item:hover .text-overlay { opacity: 1; }
+        }
+
+        /* Ajustes para el Carrusel Swiper */
+        .swiper { width: 100%; padding-top: 2rem; padding-bottom: 3.5rem; }
+        .swiper-slide { width: 280px; height: 280px; }
+        @media (min-width: 768px) { .swiper-slide { width: 350px; height: 350px; } }
+        
+        /* Personalizar los puntos de paginación del carrusel */
+        .swiper-pagination-bullet { background-color: #4B5563; opacity: 1; }
+        .swiper-pagination-bullet-active { background-color: #10b981 !important; transform: scale(1.2); }
+    </style>
+</head>
+<body class="text-gray-200">
+
+    <!-- Pre-cargador -->
+    <div id="preloader" aria-hidden="true">
+        <div class="spinner mb-4 md:mb-6"></div>
+        <img src="https://i.postimg.cc/4y7hwz57/logo-fb-profile-1024-1-removebg-preview.png" alt="Cargando M&D Luxury" width="192" height="192" class="h-24 sm:h-32 md:h-48 animate-pulse drop-shadow-[0_0_15px_rgba(16,185,129,0.8)] object-contain">
+    </div>
+
+    <!-- Botones Flotantes con Nuevo Contacto -->
+    <div class="floating-buttons" role="group" aria-label="Botones de contacto rápido">
+        <a href="https://wa.me/51907369097?text=Hola%20M%26D%20Luxury,%20deseo%20reservar%20un%20servicio" target="_blank" rel="noopener noreferrer" class="float-btn bg-whatsapp pulse-fx" aria-label="Contactar por WhatsApp">
+            <i class="fab fa-whatsapp" aria-hidden="true"></i>
+        </a>
+        <a href="tel:+51907369097" class="float-btn bg-phone pulse-fx" aria-label="Llamar directamente" style="animation-delay: 1s;">
+            <i class="fa fa-phone-alt" aria-hidden="true"></i>
+        </a>
+    </div>
+
+    <!-- Header y Navegación -->
+    <header class="bg-dark/80 backdrop-blur-md sticky top-0 z-40 border-b border-primary/20 shadow-[0_4px_20px_rgba(0,0,0,0.5)]">
+        <div class="container mx-auto px-4 sm:px-6 py-2 flex justify-between items-center">
+            <a href="#inicio" class="flex items-center gap-2 sm:gap-3" aria-label="Ir al inicio">
+                <img src="https://i.postimg.cc/4y7hwz57/logo-fb-profile-1024-1-removebg-preview.png" alt="Logotipo M&D Luxury" width="144" height="144" class="h-16 sm:h-20 md:h-28 object-contain drop-shadow-[0_0_10px_rgba(16,185,129,0.6)] transition-transform duration-300 hover:scale-105">
+            </a>
+            
+            <nav class="hidden lg:flex space-x-6 xl:space-x-8 text-sm font-medium ml-auto mr-4 xl:mr-8" aria-label="Navegación principal">
+                <a href="#inicio" data-i18n="nav_home" class="text-gray-300 hover:text-primary transition duration-300">Inicio</a>
+                <a href="#servicios" data-i18n="nav_serv" class="text-gray-300 hover:text-primary transition duration-300">Servicios</a>
+                <a href="#nosotros" data-i18n="nav_about" class="text-gray-300 hover:text-primary transition duration-300">Nosotros</a>
+                <a href="#unidades" data-i18n="nav_fleet" class="text-gray-300 hover:text-primary transition duration-300">Unidades</a>
+                <a href="#contacto" data-i18n="nav_cont" class="text-gray-300 hover:text-primary transition duration-300">Contacto</a>
+            </nav>
+
+            <div class="flex items-center gap-3 sm:gap-4">
+                <!-- Selector de Idioma -->
+                <div class="relative">
+                    <button id="lang-btn" aria-haspopup="true" aria-expanded="false" class="flex items-center text-gray-300 hover:text-primary transition duration-300 text-xs sm:text-sm font-bold focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded p-1">
+                        <i class="fa fa-globe mr-1 sm:mr-2" aria-hidden="true"></i>
+                        <span id="lang-indicator">ES</span>
+                    </button>
+                    <div id="lang-dropdown" class="hidden absolute right-0 mt-3 w-28 sm:w-32 bg-darker border border-gray-700 rounded-lg shadow-xl z-50 overflow-hidden" role="menu">
+                        <button onclick="setLanguage('es')" role="menuitem" class="w-full text-left px-3 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm text-gray-300 hover:bg-gray-800 hover:text-primary transition flex items-center gap-2 sm:gap-3 focus:outline-none focus:bg-gray-800">
+                            <img src="https://flagcdn.com/w20/es.png" alt="Bandera Español" width="20" height="15" class="rounded-sm" loading="lazy"> ES
+                        </button>
+                        <button onclick="setLanguage('en')" role="menuitem" class="w-full text-left px-3 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm text-gray-300 hover:bg-gray-800 hover:text-primary transition flex items-center gap-2 sm:gap-3 focus:outline-none focus:bg-gray-800">
+                            <img src="https://flagcdn.com/w20/us.png" alt="Bandera Inglés" width="20" height="15" class="rounded-sm" loading="lazy"> EN
+                        </button>
+                    </div>
+                </div>
+
+                <button id="mobile-menu-button" aria-label="Abrir menú móvil" aria-expanded="false" class="lg:hidden text-primary p-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded">
+                    <i class="fa fa-bars text-xl sm:text-2xl" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Menú Móvil -->
+        <nav id="mobile-menu" class="hidden lg:hidden bg-darker border-t border-gray-800 shadow-2xl absolute w-full left-0" aria-label="Navegación móvil">
+            <a href="#inicio" data-i18n="nav_home" class="block text-center py-3 sm:py-4 px-4 text-sm text-gray-300 hover:bg-primary hover:text-dark font-semibold transition border-b border-gray-800/50">Inicio</a>
+            <a href="#servicios" data-i18n="nav_serv" class="block text-center py-3 sm:py-4 px-4 text-sm text-gray-300 hover:bg-primary hover:text-dark font-semibold transition border-b border-gray-800/50">Servicios</a>
+            <a href="#nosotros" data-i18n="nav_about" class="block text-center py-3 sm:py-4 px-4 text-sm text-gray-300 hover:bg-primary hover:text-dark font-semibold transition border-b border-gray-800/50">Nosotros</a>
+            <a href="#unidades" data-i18n="nav_fleet" class="block text-center py-3 sm:py-4 px-4 text-sm text-gray-300 hover:bg-primary hover:text-dark font-semibold transition border-b border-gray-800/50">Unidades</a>
+            <a href="#contacto" data-i18n="nav_cont" class="block text-center py-3 sm:py-4 px-4 text-sm text-gray-300 hover:bg-primary hover:text-dark font-semibold transition">Contacto</a>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Sección Hero -->
+        <section id="inicio" class="min-h-[100vh] sm:min-h-[85vh] flex items-center bg-cover bg-center relative pb-12 sm:pb-0 pt-20 sm:pt-0" style="background-image: url('https://i.postimg.cc/d3vt6ctZ/Chat-GPT-Image-16-mar-2026-00-06-27.png');">
+            <div class="absolute inset-0 bg-gradient-to-r from-dark via-dark/90 sm:via-dark/80 to-dark/40 sm:to-transparent"></div>
+            <div class="container mx-auto px-4 sm:px-6 relative z-10 text-center lg:text-left">
+                <h4 data-i18n="hero_kicker" class="text-primary text-lg sm:text-xl md:text-2xl font-bold uppercase tracking-widest mb-3 sm:mb-4 drop-shadow-[0_0_8px_rgba(16,185,129,0.5)]">Transporte Ejecutivo & VIP</h4>
+                <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white mb-4 sm:mb-6 leading-tight animated-text max-w-4xl mx-auto lg:mx-0" aria-live="polite"></h1>
+                <p data-i18n="hero_sub" class="text-base sm:text-lg md:text-xl text-gray-300 mb-8 sm:mb-10 max-w-2xl mx-auto lg:mx-0 font-light px-2 sm:px-0">Servicio de transporte corporativo premium y traslados al aeropuerto. Puntualidad, seguridad y confort 24/7.</p>
+                <a href="#servicios" class="inline-flex items-center gap-2 sm:gap-3 bg-primary text-dark font-bold py-3 sm:py-4 px-6 sm:px-8 rounded-full text-base sm:text-lg hover:bg-white transition duration-300 shadow-[0_0_15px_rgba(16,185,129,0.4)] hover:shadow-[0_0_25px_rgba(255,255,255,0.8)] focus:outline-none focus:ring-4 focus:ring-primary/50">
+                    <i class="fa fa-car icon-fx text-lg sm:text-xl" aria-hidden="true"></i>
+                    <span data-i18n="hero_btn">Ver Servicios</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- Sección Estadísticas -->
+        <section class="py-8 sm:py-10 md:py-12 bg-darker border-b border-gray-800 relative z-20 sm:-mt-10 mx-2 sm:mx-4 lg:mx-16 rounded-xl shadow-[0_8px_25px_rgba(0,0,0,0.7)]">
+            <div class="container mx-auto px-4 sm:px-6">
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 text-center">
+                    <div>
+                        <i class="fa fa-certificate text-3xl sm:text-4xl text-primary mb-2 sm:mb-3 icon-fx" aria-hidden="true"></i>
+                        <h5 data-i18n="stat_exp" class="text-gray-400 font-semibold mb-1 text-xs sm:text-sm uppercase tracking-wider">Años Experiencia</h5>
+                        <div class="text-3xl sm:text-4xl font-black text-white counter" data-target="2">0</div>
+                    </div>
+                    <div>
+                        <i class="fa fa-car text-3xl sm:text-4xl text-primary mb-2 sm:mb-3 icon-fx" aria-hidden="true"></i>
+                        <h5 data-i18n="stat_drv" class="text-gray-400 font-semibold mb-1 text-xs sm:text-sm uppercase tracking-wider">Conductores</h5>
+                        <div class="text-3xl sm:text-4xl font-black text-white counter" data-target="60">0</div>
+                    </div>
+                    <div>
+                        <i class="fa fa-users text-3xl sm:text-4xl text-primary mb-2 sm:mb-3 icon-fx" aria-hidden="true"></i>
+                        <h5 data-i18n="stat_vip" class="text-gray-400 font-semibold mb-1 text-xs sm:text-sm uppercase tracking-wider">Traslados VIP</h5>
+                        <div class="text-3xl sm:text-4xl font-black text-white counter" data-target="3000">0</div>
+                    </div>
+                    <div>
+                        <i class="fa fa-suitcase text-3xl sm:text-4xl text-primary mb-2 sm:mb-3 icon-fx" aria-hidden="true"></i>
+                        <h5 data-i18n="stat_corp" class="text-gray-400 font-semibold mb-1 text-xs sm:text-sm uppercase tracking-wider">Empresas</h5>
+                        <div class="text-3xl sm:text-4xl font-black text-white counter" data-target="200">0</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección Nosotros -->
+        <section id="nosotros" class="py-16 md:py-20 lg:py-24 bg-dark">
+            <div class="container mx-auto px-4 sm:px-6">
+                <div class="flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
+                    <div class="w-full lg:w-1/2 relative group px-2 sm:px-0">
+                        <div class="absolute inset-0 bg-primary/20 blur-xl rounded-full transform group-hover:scale-105 transition duration-500"></div>
+                        <img src="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&w=800&q=80" alt="Vehículo corporativo de lujo" class="rounded-2xl shadow-2xl relative z-10 border border-gray-800 w-full object-cover max-h-[300px] sm:max-h-[400px] lg:max-h-[500px]" loading="lazy">
+                    </div>
+                    <div class="w-full lg:w-1/2 text-center lg:text-left">
+                        <h6 data-i18n="title_about_sub" class="text-primary font-bold uppercase tracking-wider mb-2 text-sm sm:text-base drop-shadow-[0_0_5px_rgba(16,185,129,0.8)]">Nuestra Empresa</h6>
+                        <h2 data-i18n="title_about" class="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 sm:mb-6">M&D <span class="text-primary">Luxury</span></h2>
+                        <div class="text-gray-400 space-y-4 mb-6 sm:mb-8 text-base sm:text-lg">
+                            <p data-i18n="about_p1">Somos una empresa con 2 años en el mercado, dedicados a brindar servicios de alquiler y transporte corporativo. Contamos con 60 unidades modernas de diferentes capacidades: Van, minivan, camioneta tres filas, y autos.</p>
+                            <p data-i18n="about_p2">Brindamos servicio de transporte premium a ejecutivos y público en general que desee viajar en primera clase. Nuestros conductores son rigurosamente verificados y atendemos las 24 horas, los 365 días del año.</p>
+                        </div>
+                        <div class="flex items-center justify-center lg:justify-start gap-3 sm:gap-4 p-3 sm:p-4 rounded-xl bg-darker border border-gray-800 inline-flex hover:border-primary transition duration-300 w-full sm:w-auto">
+                            <i class="fa fa-check-circle text-primary text-2xl sm:text-3xl icon-fx pulse-fx" aria-hidden="true"></i>
+                            <div class="text-left">
+                                <h6 class="font-bold text-white tracking-wide text-sm sm:text-base">M&D Luxury</h6>
+                                <small class="text-primary font-semibold text-xs sm:text-sm">Empresa Peruana</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección Servicios -->
+        <section id="servicios" class="py-16 md:py-20 lg:py-24 bg-darker">
+            <div class="container mx-auto px-4 sm:px-6">
+                <div class="text-center mb-12 sm:mb-16">
+                    <h6 data-i18n="title_serv_sub" class="text-primary font-bold uppercase tracking-wider mb-2 text-sm sm:text-base drop-shadow-[0_0_5px_rgba(16,185,129,0.8)]">Nuestros Servicios</h6>
+                    <h2 data-i18n="title_serv" class="text-3xl sm:text-4xl md:text-5xl font-bold text-white">Servicios <span class="text-primary">Especializados</span></h2>
+                    <div class="w-20 sm:w-24 h-1 bg-primary mx-auto mt-4 sm:mt-6 rounded shadow-[0_0_10px_rgba(16,185,129,0.8)]"></div>
+                </div>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+                    <!-- S1 -->
+                    <article class="flip-card h-72 sm:h-80 w-full max-w-sm mx-auto sm:max-w-none">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front" style="background-image: linear-gradient(rgba(3,7,18,0.8), rgba(3,7,18,0.8)), url('https://i.postimg.cc/vHwMshQR/Chat-GPT-Image-15-mar-2026-22-03-30.png'); background-size: cover;">
+                                <i class="fa fa-user-tie text-4xl sm:text-5xl text-primary mb-3 sm:mb-4 icon-fx" aria-hidden="true"></i>
+                                <h3 data-i18n="serv1_t" class="text-xl sm:text-2xl font-bold text-white px-2">Servicio Ejecutivo VIP</h3>
+                            </div>
+                            <div class="flip-card-back">
+                                <i class="fa fa-user-tie text-3xl sm:text-4xl text-primary mb-3 sm:mb-4" aria-hidden="true"></i>
+                                <p data-i18n="serv1_d" class="text-sm sm:text-base text-gray-300">Viaje en la flota vehicular más moderna. Discreción, confort y choferes con alto nivel de preparación.</p>
+                            </div>
+                        </div>
+                    </article>
+                    <!-- S2 -->
+                    <article class="flip-card h-72 sm:h-80 w-full max-w-sm mx-auto sm:max-w-none">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front" style="background-image: linear-gradient(rgba(3,7,18,0.8), rgba(3,7,18,0.8)), url('https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&w=600&q=80'); background-size: cover;">
+                                <i class="fa fa-building text-4xl sm:text-5xl text-primary mb-3 sm:mb-4 icon-fx" aria-hidden="true"></i>
+                                <h3 data-i18n="serv2_t" class="text-xl sm:text-2xl font-bold text-white px-2">Transporte Empresarial</h3>
+                            </div>
+                            <div class="flip-card-back">
+                                <i class="fa fa-building text-3xl sm:text-4xl text-primary mb-3 sm:mb-4" aria-hidden="true"></i>
+                                <p data-i18n="serv2_d" class="text-sm sm:text-base text-gray-300">Soluciones eficientes para el traslado de personal y ejecutivos de su empresa. Facturación disponible.</p>
+                            </div>
+                        </div>
+                    </article>
+                    <!-- S3 -->
+                    <article class="flip-card h-72 sm:h-80 w-full max-w-sm mx-auto sm:max-w-none">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front" style="background-image: linear-gradient(rgba(3,7,18,0.8), rgba(3,7,18,0.8)), url('https://i.postimg.cc/4NyyYwDn/Chat-GPT-Image-15-mar-2026-21-56-27.png'); background-size: cover;">
+                                <i class="fa fa-plane-departure text-4xl sm:text-5xl text-primary mb-3 sm:mb-4 icon-fx" aria-hidden="true"></i>
+                                <h3 data-i18n="serv3_t" class="text-xl sm:text-2xl font-bold text-white px-2">Traslados Aeroportuarios</h3>
+                            </div>
+                            <div class="flip-card-back">
+                                <i class="fa fa-plane-departure text-3xl sm:text-4xl text-primary mb-3 sm:mb-4" aria-hidden="true"></i>
+                                <p data-i18n="serv3_d" class="text-sm sm:text-base text-gray-300">Traslados puntuales desde y hacia el Aeropuerto Internacional Jorge Chávez las 24 horas.</p>
+                            </div>
+                        </div>
+                    </article>
+                    <!-- S4 -->
+                    <article class="flip-card h-72 sm:h-80 w-full max-w-sm mx-auto sm:max-w-none">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front" style="background-image: linear-gradient(rgba(3,7,18,0.8), rgba(3,7,18,0.8)), url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80'); background-size: cover;">
+                                <i class="fa fa-umbrella-beach text-4xl sm:text-5xl text-primary mb-3 sm:mb-4 icon-fx" aria-hidden="true"></i>
+                                <h3 data-i18n="serv4_t" class="text-xl sm:text-2xl font-bold text-white px-2">Traslados Costeros</h3>
+                            </div>
+                            <div class="flip-card-back">
+                                <i class="fa fa-umbrella-beach text-3xl sm:text-4xl text-primary mb-3 sm:mb-4" aria-hidden="true"></i>
+                                <p data-i18n="serv4_d" class="text-sm sm:text-base text-gray-300">Servicio de transporte hacia los principales balnearios del sur y norte con total comodidad para su familia.</p>
+                            </div>
+                        </div>
+                    </article>
+                    <!-- S5 -->
+                    <article class="flip-card h-72 sm:h-80 w-full max-w-sm mx-auto sm:max-w-none">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front" style="background-image: linear-gradient(rgba(3,7,18,0.8), rgba(3,7,18,0.8)), url('https://images.unsplash.com/photo-1526392060635-9d6019884377?auto=format&fit=crop&w=600&q=80'); background-size: cover;">
+                                <i class="fa fa-camera-retro text-4xl sm:text-5xl text-primary mb-3 sm:mb-4 icon-fx" aria-hidden="true"></i>
+                                <h3 data-i18n="serv5_t" class="text-xl sm:text-2xl font-bold text-white px-2">Turismo & Full Days</h3>
+                            </div>
+                            <div class="flip-card-back">
+                                <i class="fa fa-camera-retro text-3xl sm:text-4xl text-primary mb-3 sm:mb-4" aria-hidden="true"></i>
+                                <p data-i18n="serv5_d" class="text-sm sm:text-base text-gray-300">Paseos y excursiones por la ciudad y destinos turísticos con conductores experimentados.</p>
+                            </div>
+                        </div>
+                    </article>
+                    <!-- S6 -->
+                    <article class="flip-card h-72 sm:h-80 w-full max-w-sm mx-auto sm:max-w-none">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front" style="background-image: linear-gradient(rgba(3,7,18,0.8), rgba(3,7,18,0.8)), url('https://images.unsplash.com/photo-1580674285054-bed31e145f59?auto=format&fit=crop&w=600&q=80'); background-size: cover;">
+                                <i class="fa fa-box-open text-4xl sm:text-5xl text-primary mb-3 sm:mb-4 icon-fx" aria-hidden="true"></i>
+                                <h3 data-i18n="serv6_t" class="text-xl sm:text-2xl font-bold text-white px-2">Mensajería Corporativa</h3>
+                            </div>
+                            <div class="flip-card-back">
+                                <i class="fa fa-box-open text-3xl sm:text-4xl text-primary mb-3 sm:mb-4" aria-hidden="true"></i>
+                                <p data-i18n="serv6_d" class="text-sm sm:text-base text-gray-300">Envío de documentos y paquetes de manera rápida, segura y con confirmación de entrega inmediata.</p>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección Flota -->
+        <section id="unidades" class="py-16 md:py-20 lg:py-24 bg-dark overflow-hidden">
+            <div class="container mx-auto px-4 sm:px-6">
+                <div class="text-center mb-10 sm:mb-12">
+                    <h6 data-i18n="title_fleet_sub" class="text-primary font-bold uppercase tracking-wider mb-2 text-sm sm:text-base drop-shadow-[0_0_5px_rgba(16,185,129,0.8)]">Nuestras Unidades</h6>
+                    <h2 data-i18n="title_fleet" class="text-3xl sm:text-4xl md:text-5xl font-bold text-white">Flota <span class="text-primary">Vehicular</span></h2>
+                    <div class="w-20 sm:w-24 h-1 bg-primary mx-auto mt-4 sm:mt-6 rounded shadow-[0_0_10px_rgba(16,185,129,0.8)]"></div>
+                </div>
+                
+                <!-- Swiper -->
+                <div class="swiper fleet-swiper">
+                    <div class="swiper-wrapper">
+                        <!-- Slide 1 -->
+                        <div class="swiper-slide">
+                            <figure class="gallery-item w-full h-full shadow-2xl border border-gray-800 rounded-2xl">
+                                <div class="background-image" style="background-image: url('https://i.postimg.cc/sDFkG40Q/Chat-GPT-Image-15-mar-2026-22-21-26.png');"></div>
+                                <figcaption class="text-overlay pb-8">
+                                    <h3 data-i18n="fleet1" class="text-xl sm:text-2xl font-bold border-b-2 border-primary pb-1 sm:pb-2">Automóvil Sedán</h3>
+                                </figcaption>
+                            </figure>
+                        </div>
+                        <!-- Slide 2 -->
+                        <div class="swiper-slide">
+                            <figure class="gallery-item w-full h-full shadow-2xl border border-gray-800 rounded-2xl">
+                                <div class="background-image" style="background-image: url('https://i.postimg.cc/fLNd0FXY/Chat-GPT-Image-15-mar-2026-23-34-12.png');"></div>
+                                <figcaption class="text-overlay pb-8">
+                                    <h3 data-i18n="fleet2" class="text-xl sm:text-2xl font-bold border-b-2 border-primary pb-1 sm:pb-2">Camioneta SUV</h3>
+                                </figcaption>
+                            </figure>
+                        </div>
+                        <!-- Slide 3 -->
+                        <div class="swiper-slide">
+                            <figure class="gallery-item w-full h-full shadow-2xl border border-gray-800 rounded-2xl">
+                                <div class="background-image" style="background-image: url('https://i.postimg.cc/ZnFz59mD/Chat-GPT-Image-15-mar-2026-23-47-58.png');"></div>
+                                <figcaption class="text-overlay pb-8">
+                                    <h3 data-i18n="fleet3" class="text-xl sm:text-2xl font-bold border-b-2 border-primary pb-1 sm:pb-2">Van / Minivan</h3>
+                                </figcaption>
+                            </figure>
+                        </div>
+                        <!-- Slide 4 -->
+                        <div class="swiper-slide">
+                            <figure class="gallery-item w-full h-full shadow-2xl border border-gray-800 rounded-2xl">
+                                <div class="background-image" style="background-image: url('https://i.postimg.cc/P5MJRx8h/Furgoneta-Mercedes-en-Miraflores.png'); background-position: left center;"></div>
+                                <figcaption class="text-overlay pb-8">
+                                    <h3 data-i18n="fleet4" class="text-xl sm:text-2xl font-bold border-b-2 border-primary pb-1 sm:pb-2">Sprinter / Buses</h3>
+                                </figcaption>
+                            </figure>
+                        </div>
+                    </div>
+                    <!-- Paginación -->
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección Contacto -->
+        <section id="contacto" class="py-16 md:py-20 lg:py-24 bg-darker">
+            <div class="container mx-auto px-4 sm:px-6">
+                <div class="text-center mb-12 sm:mb-16">
+                    <h6 data-i18n="title_cont_sub" class="text-primary font-bold uppercase tracking-wider mb-2 text-sm sm:text-base drop-shadow-[0_0_5px_rgba(16,185,129,0.8)]">Contacto</h6>
+                    <h2 data-i18n="title_cont" class="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">Central de <span class="text-primary">Reservas</span></h2>
+                    <p data-i18n="cont_desc" class="text-base sm:text-lg text-gray-400 max-w-2xl mx-auto">Haga sus reservas las 24 horas. Una unidad lo recogerá en el punto indicado con total seriedad y puntualidad.</p>
+                </div>
+                
+                <address class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 mb-10 sm:mb-12 not-italic max-w-4xl mx-auto px-4 sm:px-0">
+                    <div class="bg-dark p-6 sm:p-8 rounded-xl border border-gray-800 text-center hover:border-primary transition duration-300 group shadow-lg">
+                        <i class="fa fa-map-marker-alt text-3xl sm:text-4xl text-primary mb-3 sm:mb-4 icon-fx group-hover:scale-125" aria-hidden="true"></i>
+                        <h5 data-i18n="cont_loc" class="font-bold text-white mb-2 text-base sm:text-lg">Ubicación</h5>
+                        <p class="text-gray-400 text-sm sm:text-base">Lima, Perú</p>
+                    </div>
+                    <div class="bg-dark p-6 sm:p-8 rounded-xl border border-gray-800 text-center hover:border-primary transition duration-300 group shadow-lg">
+                        <i class="fab fa-whatsapp text-3xl sm:text-4xl text-primary mb-3 sm:mb-4 icon-fx group-hover:scale-125" aria-hidden="true"></i>
+                        <h5 data-i18n="cont_phone" class="font-bold text-white mb-2 text-base sm:text-lg">WhatsApp</h5>
+                        <a href="https://wa.me/51907369097" target="_blank" rel="noopener noreferrer" class="text-gray-400 text-sm sm:text-base hover:text-white transition block">(+51) 907 369 097</a>
+                    </div>
+                </address>
+
+                <!-- Formulario -->
+                <div class="max-w-3xl mx-auto px-4 sm:px-0">
+                    <div class="bg-dark p-6 sm:p-8 rounded-xl border border-gray-800 shadow-xl">
+                        <form id="contact-form">
+                            <div class="mb-4 sm:mb-5">
+                                <label for="name" data-i18n="form_name" class="block text-gray-400 mb-2 text-sm sm:text-base">Nombre Completo</label>
+                                <input type="text" id="name" name="name" class="w-full p-3 sm:p-4 bg-darker border border-gray-700 text-white rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition text-sm sm:text-base" required>
+                            </div>
+                            <div class="mb-5 sm:mb-6">
+                                <label for="message" data-i18n="form_msg" class="block text-gray-400 mb-2 text-sm sm:text-base">Detalles de su reserva</label>
+                                <textarea id="message" name="message" rows="4" class="w-full p-3 sm:p-4 bg-darker border border-gray-700 text-white rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition text-sm sm:text-base" required></textarea>
+                            </div>
+                            <button type="submit" data-i18n="form_btn" class="w-full bg-primary text-dark font-bold py-3 sm:py-4 px-6 sm:px-8 rounded-lg uppercase hover:bg-white transition duration-300 shadow-[0_0_15px_rgba(16,185,129,0.4)] hover:shadow-[0_0_20px_rgba(255,255,255,0.8)] focus:outline-none focus:ring-4 focus:ring-white text-sm sm:text-base">
+                                Enviar por WhatsApp
+                            </button>
+                            <p id="form-message" class="text-center mt-3 sm:mt-4 text-xs sm:text-sm font-bold text-primary" aria-live="polite"></p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Pie de Página -->
+    <footer class="bg-[#020408] border-t border-primary/30 pt-12 sm:pt-16 pb-6 sm:pb-8 relative overflow-hidden">
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 sm:w-1/2 h-1 bg-primary blur-md"></div>
+        <div class="container mx-auto px-4 sm:px-6 text-center relative z-10">
+            <div class="mb-6 sm:mb-8 flex justify-center items-center gap-2 sm:gap-3">
+                 <img src="https://i.postimg.cc/4y7hwz57/logo-fb-profile-1024-1-removebg-preview.png" alt="Logotipo M&D Luxury" width="224" height="224" loading="lazy" class="h-32 sm:h-40 md:h-48 object-contain drop-shadow-[0_0_12px_rgba(16,185,129,0.6)] transition-transform duration-300 hover:scale-105">
+            </div>
+            <div class="text-gray-400 space-y-2 mb-6 sm:mb-8 max-w-lg mx-auto text-sm sm:text-base">
+                <p><i class="fa fa-map-marker-alt mr-2 text-primary" aria-hidden="true"></i>Lima, Perú</p>
+                <p>Operado por M&D Luxury</p>
+                <p class="text-white font-bold text-xl sm:text-2xl mt-3 sm:mt-4"><i class="fa fa-phone-alt mr-2 text-primary icon-fx pulse-fx" aria-hidden="true"></i>(+51) 907 369 097</p>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-6 sm:pt-8 flex flex-col md:flex-row justify-between items-center gap-4 sm:gap-0">
+                <p class="text-gray-500 text-xs sm:text-sm order-2 md:order-1">
+                    &copy; <span id="year"></span> M&D Luxury. Todos los derechos reservados.
+                </p>
+                <div class="flex space-x-3 sm:space-x-4 order-1 md:order-2">
+                    <a href="https://www.facebook.com/profile.php?id=61580776319881" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-darker border border-gray-800 flex items-center justify-center text-gray-400 hover:border-primary hover:text-primary transition icon-fx text-sm sm:text-base"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
+                    <a href="https://wa.me/51907369097" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-darker border border-gray-800 flex items-center justify-center text-gray-400 hover:border-primary hover:text-primary transition icon-fx text-sm sm:text-base"><i class="fab fa-whatsapp" aria-hidden="true"></i></a>
+                    <a href="https://www.instagram.com/mydluxury_/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-darker border border-gray-800 flex items-center justify-center text-gray-400 hover:border-primary hover:text-primary transition icon-fx text-sm sm:text-base"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        // Optimización: Cache de Elementos del DOM
+        const DOM = {
+            year: document.getElementById('year'),
+            preloader: document.getElementById('preloader'),
+            langIndicator: document.getElementById('lang-indicator'),
+            langDropdown: document.getElementById('lang-dropdown'),
+            langBtn: document.getElementById('lang-btn'),
+            mobileMenuBtn: document.getElementById('mobile-menu-button'),
+            mobileMenu: document.getElementById('mobile-menu'),
+            contactForm: document.getElementById('contact-form'),
+            formMessage: document.getElementById('form-message'),
+            heroTitle: document.querySelector('.animated-text')
+        };
+
+        DOM.year.textContent = new Date().getFullYear();
+
+        const translations = {
+            es: {
+                hero_kicker: "Transporte Ejecutivo & VIP",
+                hero_anim: "Experiencia de Viaje <br class='hidden md:block'/><span class='text-primary drop-shadow-[0_0_10px_rgba(16,185,129,0.8)]'>Premium</span>",
+                nav_home: "Inicio", nav_serv: "Servicios", nav_about: "Nosotros", nav_fleet: "Unidades", nav_cont: "Contacto",
+                hero_sub: "Servicio de transporte corporativo premium y traslados al aeropuerto. Puntualidad, seguridad y confort 24/7.",
+                hero_btn: "Ver Servicios",
+                stat_exp: "Años Experiencia", stat_drv: "Conductores", stat_vip: "Traslados VIP", stat_corp: "Empresas",
+                title_about_sub: "Nuestra Empresa", title_about: "M&D <span class='text-primary'>Luxury</span>",
+                about_p1: "Somos una empresa con 2 años en el mercado, dedicados a brindar servicios de alquiler y transporte corporativo. Contamos con 60 unidades modernas de diferentes capacidades: Van, minivan, camioneta tres filas, y autos.",
+                about_p2: "Brindamos servicio de transporte premium a ejecutivos y público en general que desee viajar en primera clase. Nuestros conductores son rigurosamente verificados y atendemos las 24 horas, los 365 días del año.",
+                title_serv_sub: "Nuestros Servicios", title_serv: "Servicios <span class='text-primary'>Especializados</span>",
+                serv1_t: "Servicio Ejecutivo VIP", serv1_d: "Viaje en la flota vehicular más moderna. Discreción, confort y choferes con alto nivel de preparación.",
+                serv2_t: "Transporte Empresarial", serv2_d: "Soluciones eficientes para el traslado de personal y ejecutivos de su empresa. Facturación disponible.",
+                serv3_t: "Traslados Aeroportuarios", serv3_d: "Traslados puntuales desde y hacia el Aeropuerto Internacional Jorge Chávez las 24 horas.",
+                serv4_t: "Traslados Costeros", serv4_d: "Servicio de transporte hacia los principales balnearios del sur y norte con total comodidad para su familia.",
+                serv5_t: "Turismo & Full Days", serv5_d: "Paseos y excursiones por la ciudad y destinos turísticos con conductores experimentados.",
+                serv6_t: "Mensajería Corporativa", serv6_d: "Envío de documentos y paquetes de manera rápida, segura y con confirmación de entrega inmediata.",
+                title_fleet_sub: "Nuestras Unidades", title_fleet: "Flota <span class='text-primary'>Vehicular</span>",
+                fleet1: "Automóvil Sedán", fleet2: "Camioneta SUV", fleet3: "Van / Minivan", fleet4: "Sprinter / Buses",
+                title_cont_sub: "Contacto", title_cont: "Central de <span class='text-primary'>Reservas</span>",
+                cont_desc: "Haga sus reservas las 24 horas. Una unidad lo recogerá en el punto indicado con total seriedad y puntualidad.",
+                cont_loc: "Ubicación", cont_phone: "WhatsApp", cont_web: "Web",
+                form_name: "Nombre Completo", form_msg: "Detalles de su reserva", form_btn: "Enviar por WhatsApp"
+            },
+            en: {
+                hero_kicker: "Executive & VIP Transport",
+                hero_anim: "Premium Travel <br class='hidden md:block'/><span class='text-primary drop-shadow-[0_0_10px_rgba(16,185,129,0.8)]'>Experience</span>",
+                nav_home: "Home", nav_serv: "Services", nav_about: "About Us", nav_fleet: "Fleet", nav_cont: "Contact",
+                hero_sub: "Premium corporate transport service and airport transfers. Punctuality, safety and comfort 24/7.",
+                hero_btn: "View Services",
+                stat_exp: "Years Experience", stat_drv: "Drivers", stat_vip: "VIP Transfers", stat_corp: "Companies",
+                title_about_sub: "Our Company", title_about: "M&D <span class='text-primary'>Luxury</span>",
+                about_p1: "We are a company with 2 years in the market, dedicated to providing corporate transport and rental services. We have 60 modern units of different capacities: Vans, minivans, 3-row SUVs, and cars.",
+                about_p2: "We provide premium transport service to executives and the general public who wish to travel first class. Our drivers are rigorously verified and we operate 24 hours a day, 365 days a year.",
+                title_serv_sub: "Our Services", title_serv: "Specialized <span class='text-primary'>Services</span>",
+                serv1_t: "Executive VIP Service", serv1_d: "Travel in the most modern fleet. Discretion, comfort, and highly trained drivers.",
+                serv2_t: "Corporate Transport", serv2_d: "Efficient solutions for staff and executive transport for your company. Invoicing available.",
+                serv3_t: "Airport Transfers", serv3_d: "Punctual transfers to and from Jorge Chávez International Airport 24 hours a day.",
+                serv4_t: "Coastal Transfers", serv4_d: "Transport service to the main southern and northern beaches in total comfort for your family.",
+                serv5_t: "Tourism & Full Days", serv5_d: "Tours and excursions around the city and tourist destinations with experienced drivers.",
+                serv6_t: "Corporate Courier", serv6_d: "Fast, safe document and package delivery with immediate delivery confirmation.",
+                title_fleet_sub: "Our Units", title_fleet: "Vehicle <span class='text-primary'>Fleet</span>",
+                fleet1: "Sedan Car", fleet2: "SUV Truck", fleet3: "Van / Minivan", fleet4: "Sprinter / Buses",
+                title_cont_sub: "Contact", title_cont: "Reservation <span class='text-primary'>Center</span>",
+                cont_desc: "Make your reservations 24 hours a day. A unit will pick you up at the specified point with total seriousness and punctuality.",
+                cont_loc: "Location", cont_phone: "WhatsApp", cont_web: "Website",
+                form_name: "Full Name", form_msg: "Reservation Details", form_btn: "Send via WhatsApp"
+            }
+        };
+
+        let currentLang = 'es';
+        const translatables = document.querySelectorAll('[data-i18n]');
+
+        // Cambiador de Idioma
+        window.setLanguage = function(lang) {
+            currentLang = lang;
+            DOM.langIndicator.textContent = lang.toUpperCase();
+            document.documentElement.lang = lang;
+            DOM.langDropdown.classList.add('hidden');
+            DOM.langBtn.setAttribute('aria-expanded', 'false');
+
+            const currDict = translations[lang];
+            translatables.forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (currDict[key]) el.innerHTML = currDict[key];
+            });
+            startHeroAnimation(currDict.hero_anim);
+        };
+
+        // Animación de Texto Hero
+        function startHeroAnimation(textContent) {
+            DOM.heroTitle.innerHTML = ''; 
+            
+            let i = 0;
+            while(i < textContent.length) {
+                if (textContent.substring(i, i+4) === '<br ' || textContent.substring(i, i+5) === '<span') {
+                    const closeIndex = textContent.indexOf('>', i);
+                    if (closeIndex !== -1) {
+                        DOM.heroTitle.innerHTML += textContent.substring(i, closeIndex + 1);
+                        i = closeIndex + 1;
+                        continue;
+                    }
+                }
+                if (textContent.substring(i, i+7) === '</span>') {
+                    DOM.heroTitle.innerHTML += '</span>';
+                    i += 7;
+                    continue;
+                }
+
+                let char = textContent[i];
+                if (char.trim() !== '') {
+                    const span = document.createElement('span');
+                    span.textContent = char;
+                    span.style.animationDelay = `${i * 0.03}s`;
+                    DOM.heroTitle.appendChild(span);
+                } else {
+                    DOM.heroTitle.innerHTML += ' ';
+                }
+                i++;
+            }
+            DOM.heroTitle.innerHTML = textContent.replace(/<[^>]*>?/gm, match => match);
+            
+            const frag = document.createDocumentFragment();
+            Array.from(DOM.heroTitle.childNodes).forEach((node) => {
+                 if(node.nodeType === 3) {
+                     const text = node.nodeValue;
+                     const wrapper = document.createElement('div');
+                     wrapper.style.display = 'inline';
+                     
+                     let newHtml = '';
+                     for(let j=0; j<text.length; j++) {
+                         newHtml += text[j].trim() !== '' ? `<span style="animation-delay: ${j*0.03}s">${text[j]}</span>` : ' ';
+                     }
+                     wrapper.innerHTML = newHtml;
+                     DOM.heroTitle.replaceChild(wrapper, node);
+                 }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            window.addEventListener('load', () => {
+                DOM.preloader.style.opacity = '0';
+                setTimeout(() => { 
+                    DOM.preloader.style.visibility = 'hidden'; 
+                    DOM.preloader.style.display = 'none';
+                }, 400);
+            });
+
+            const counters = document.querySelectorAll('.counter');
+            const animateCounters = () => {
+                counters.forEach(counter => {
+                    const target = +counter.getAttribute('data-target');
+                    const inc = target / 60; 
+
+                    const updateCount = () => {
+                        const count = +counter.innerText.replace(/,/g, '');
+                        if (count < target) {
+                            counter.innerText = Math.ceil(count + inc).toLocaleString('en-US');
+                            requestAnimationFrame(updateCount);
+                        } else {
+                            counter.innerText = target.toLocaleString('en-US');
+                        }
+                    };
+                    updateCount();
+                });
+            };
+
+            const statsSection = document.querySelector('.counter')?.closest('section');
+            if (statsSection) {
+                const observer = new IntersectionObserver((entries) => {
+                    if (entries[0].isIntersecting) {
+                        animateCounters();
+                        observer.disconnect();
+                    }
+                }, { threshold: 0.5 });
+                observer.observe(statsSection);
+            }
+
+            // Inicialización de Swiper (Carrusel 3D con Zoom)
+            new Swiper('.fleet-swiper', {
+                effect: 'coverflow',
+                grabCursor: true,
+                centeredSlides: true,
+                slidesPerView: 'auto',
+                coverflowEffect: {
+                    rotate: 30,       // Rotación en los lados
+                    stretch: 0,
+                    depth: 150,       // Qué tanto "zoom out" tienen las tarjetas de los lados
+                    modifier: 1.2,
+                    slideShadows: true, // Sombras realistas
+                },
+                loop: true,
+                autoplay: {
+                    delay: 3500,
+                    disableOnInteraction: false,
+                },
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                    dynamicBullets: true,
+                },
+            });
+
+            startHeroAnimation(translations['es'].hero_anim);
+
+            DOM.langBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const isHidden = DOM.langDropdown.classList.toggle('hidden');
+                DOM.langBtn.setAttribute('aria-expanded', !isHidden);
+            });
+            document.addEventListener('click', () => {
+                DOM.langDropdown.classList.add('hidden');
+                DOM.langBtn.setAttribute('aria-expanded', 'false');
+            });
+
+            DOM.mobileMenuBtn.addEventListener('click', () => {
+                const isHidden = DOM.mobileMenu.classList.toggle('hidden');
+                DOM.mobileMenuBtn.setAttribute('aria-expanded', !isHidden);
+            });
+            DOM.mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    DOM.mobileMenu.classList.add('hidden');
+                    DOM.mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                });
+            });
+
+            if (DOM.contactForm) {
+                DOM.contactForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    
+                    const formElements = e.target.elements;
+                    const name = formElements.name.value.trim();
+                    const message = formElements.message.value.trim();
+                    
+                    const text = currentLang === 'es' 
+                        ? `Hola M&D Luxury.\nQuiero solicitar una reserva:\n\n*Nombre:* ${name}\n*Detalles:* ${message}`
+                        : `Hello M&D Luxury.\nI want to request a reservation:\n\n*Name:* ${name}\n*Details:* ${message}`;
+
+                    window.open(`https://wa.me/51907369097?text=${encodeURIComponent(text)}`, '_blank', 'noopener,noreferrer');
+                    
+                    DOM.formMessage.textContent = currentLang === 'es' ? 'Abriendo WhatsApp...' : 'Opening WhatsApp...';
+                    DOM.contactForm.reset();
+                    setTimeout(() => DOM.formMessage.textContent = '', 4000);
+                });
+            }
+        });
+    </script>
+</body>
+</html>
